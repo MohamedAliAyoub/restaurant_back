@@ -1,15 +1,13 @@
 package com.example.restaurant.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "orderFood")
+@Table(name = "orders")
 public class Order extends CategoryOrder{
 
     @Column(name = "price")
@@ -20,4 +18,7 @@ public class Order extends CategoryOrder{
     @Column(name = "description")
 
     private String description;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }
