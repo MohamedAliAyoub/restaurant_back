@@ -13,11 +13,12 @@ public class Order extends CategoryOrder{
     @Column(name = "price")
     private int price;
     @Column(name = "img")
-
     private String img;
-    @Column(name = "description")
 
+    @Column(name = "description")
+    @Lob
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
