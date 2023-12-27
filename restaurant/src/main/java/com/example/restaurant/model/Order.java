@@ -1,5 +1,6 @@
 package com.example.restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class Order extends CategoryOrder{
     @Lob
     private String description;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

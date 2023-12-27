@@ -1,5 +1,6 @@
 package com.example.restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Table(name = "category")
 public class Category extends CategoryOrder{
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private Set<Order> orders;
 

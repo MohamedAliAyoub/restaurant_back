@@ -4,6 +4,6 @@ import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoCon
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DataRestApiConfig extends RepositoryRestMvcAutoConfiguration {
+public class DataRestApiConfig  {
 
 }
