@@ -1,8 +1,12 @@
 package com.example.restaurant.service;
 
 import com.example.restaurant.deo.OrderRepository;
+import com.example.restaurant.model.Category;
+import com.example.restaurant.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -12,5 +16,8 @@ public class OrderService {
     @Autowired
     public  OrderService(OrderRepository orderRepository){
         this.orderRepository =orderRepository;
+    }
+    public List<Order> allOrders(){
+        return orderRepository.findAll();
     }
 }
