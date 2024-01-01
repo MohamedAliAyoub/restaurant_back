@@ -20,6 +20,8 @@ public class Category extends CategoryOrder{
     @OneToMany(mappedBy = "category")
     private Set<Order> orders;
 
+    @Column(name = "logo")
+    private String logo;
 
 }
 
