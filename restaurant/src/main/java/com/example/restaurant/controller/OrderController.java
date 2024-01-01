@@ -4,6 +4,7 @@ import com.example.restaurant.model.Order;
 import com.example.restaurant.service.OrderService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,5 +23,13 @@ public class OrderController {
     public List<Order> allOrders()
     {
         return orderService.allOrders();
+    }
+
+
+
+    // http://localhost:8080/api/category?id={value}
+    @GetMapping("/api/category")
+    public List<Order> getAllOrderByCategoryId(@RequestParam Long id){
+        return orderService.getOrdersByCategoryId(id);
     }
 }
