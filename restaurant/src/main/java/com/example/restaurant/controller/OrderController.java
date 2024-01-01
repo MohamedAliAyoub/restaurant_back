@@ -2,14 +2,12 @@ package com.example.restaurant.controller;
 
 import com.example.restaurant.model.Order;
 import com.example.restaurant.service.OrderService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/")
 @CrossOrigin({"http://localhost:4200" , "http://localhost:3100/"})
 public class OrderController {
     private  OrderService orderService ;
@@ -19,7 +17,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/api/allOrders")
+    @GetMapping("allOrders")
     public List<Order> allOrders()
     {
         return orderService.allOrders();
@@ -28,7 +26,7 @@ public class OrderController {
 
 
     // http://localhost:8080/api/category?id={value}
-    @GetMapping("/api/category")
+    @GetMapping("category")
     public List<Order> getAllOrderByCategoryId(@RequestParam Long id){
         return orderService.getOrdersByCategoryId(id);
     }
