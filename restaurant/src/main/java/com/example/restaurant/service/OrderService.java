@@ -24,5 +24,9 @@ public class OrderService {
     public List<Order> getOrdersByCategoryId(Long id){
         return orderRepository.findByCategoryId(id);
     }
+    public List<Order> getOrderByKey(String key)
+    {
+        return orderRepository.findByNameContaining(key);
+    }
 
 }

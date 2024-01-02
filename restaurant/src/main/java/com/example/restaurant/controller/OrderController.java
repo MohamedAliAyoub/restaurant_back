@@ -2,6 +2,7 @@ package com.example.restaurant.controller;
 
 import com.example.restaurant.model.Order;
 import com.example.restaurant.service.OrderService;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,13 @@ public class OrderController {
         return orderService.getOrdersByCategoryId(id);
     }
 
+    // http://localhost:8080/api/orderKey?word=key
+    @GetMapping("orderKey")
+
+    public  List<Order> getOrderByKey(@RequestParam String word)
+    {
+     return orderService.getOrderByKey( word);
+    }
     // http://localhost:8080/api/category/id
     /*@GetMapping("/api/category/{id}")
     public List<Order> getAllOrderByCategoryId(@PathVariable Long id){

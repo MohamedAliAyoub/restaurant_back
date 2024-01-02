@@ -5,11 +5,13 @@ import com.example.restaurant.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/")
 @CrossOrigin({"http://localhost:4200" , "http://localhost:3100/"})
 
 public class CategoryController {
@@ -20,9 +22,10 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("api/allCategories")
+    @GetMapping("allCategories")
     public List<Category> getAllCategories()
     {
         return categoryService.allCategories();
     }
+
 }
