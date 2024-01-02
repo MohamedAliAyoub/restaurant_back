@@ -38,6 +38,11 @@ public class OrderController {
     }
 
 
+    // http://localhost:8080/api/order?id={value}
+    @GetMapping("orderById")
+    public Order getOrderById(@RequestParam Long id){
+        return orderService.getOrder(id);
+    }
     // http://localhost:8080/api/category/id
     /*@GetMapping("/api/category/{id}")
     public List<Order> getAllOrderByCategoryId(@PathVariable Long id){
