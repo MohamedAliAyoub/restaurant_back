@@ -29,4 +29,9 @@ public class OrderService {
         return orderRepository.findByNameContaining(key);
     }
 
+    public Order getOrder(Long id)
+    {
+        return orderRepository.findById(id).get();
+    }
+
 }

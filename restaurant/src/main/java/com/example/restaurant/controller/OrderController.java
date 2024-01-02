@@ -24,8 +24,6 @@ public class OrderController {
         return orderService.allOrders();
     }
 
-
-
     // http://localhost:8080/api/category?id={value}
     @GetMapping("category")
     public List<Order> getAllOrderByCategoryId(@RequestParam Long id){
@@ -33,12 +31,13 @@ public class OrderController {
     }
 
     // http://localhost:8080/api/orderKey?word=key
-    @GetMapping("orderKey")
-
+    @GetMapping("orderSearch")
     public  List<Order> getOrderByKey(@RequestParam String word)
     {
-     return orderService.getOrderByKey( word);
+     return orderService.getOrderByKey(word);
     }
+
+
     // http://localhost:8080/api/category/id
     /*@GetMapping("/api/category/{id}")
     public List<Order> getAllOrderByCategoryId(@PathVariable Long id){
