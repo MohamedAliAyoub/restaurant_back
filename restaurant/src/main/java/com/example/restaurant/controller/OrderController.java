@@ -19,27 +19,27 @@ public class OrderController {
     }
 
     @GetMapping("allOrders")
-    public List<Order> allOrders()
+    public List<Order> allOrders(@RequestParam int page , @RequestParam int size)
     {
-        return orderService.allOrders();
+        return orderService.allOrders(page , size);
     }
 
     // http://localhost:8080/api/category?id={value}
     @GetMapping("category")
-    public List<Order> getAllOrderByCategoryId(@RequestParam Long id){
-        return orderService.getOrdersByCategoryId(id);
+    public List<Order> getAllOrderByCategoryId(@RequestParam Long id , @RequestParam int page , @RequestParam int size){
+        return orderService.getOrdersByCategoryId(id ,page , size);
     }
 
     // http://localhost:8080/api/orderKey?word=key
     @GetMapping("orderSearch")
-    public  List<Order> getOrderByKey(@RequestParam String word)
+    public  List<Order> getOrderByKey(@RequestParam String word , @RequestParam int page , @RequestParam int size)
     {
-     return orderService.getOrderByKey(word);
+     return orderService.getOrderByKey(word , page , size);
     }
 
 
     // http://localhost:8080/api/order?id={value}
-    @GetMapping("orderById")
+    @GetMapping("order")
     public Order getOrderById(@RequestParam Long id){
         return orderService.getOrder(id);
     }

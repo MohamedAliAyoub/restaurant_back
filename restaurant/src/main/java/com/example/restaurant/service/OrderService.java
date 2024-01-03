@@ -4,6 +4,8 @@ import com.example.restaurant.deo.OrderRepository;
 import com.example.restaurant.model.Category;
 import com.example.restaurant.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +19,19 @@ public class OrderService {
     public  OrderService(OrderRepository orderRepository){
         this.orderRepository =orderRepository;
     }
-    public List<Order> allOrders(){
-        return orderRepository.findAll();
+    public List<Order> allOrders(int page ,int  size){
+        Pageable pageable = PageRequest.of(page , size);
+        return orderRepository.findAll(pageable).getContent();
     }
 
-    public List<Order> getOrdersByCategoryId(Long id){
-        return orderRepository.findByCategoryId(id);
+    public List<Order> getOrdersByCategoryId(Long id , int page ,int  size){
+        Pageable pageable = PageRequest.of(page , size);
+        return orderRepository.findByCategoryId(id , pageable).getContent();
     }
-    public List<Order> getOrderByKey(String key)
+    public List<Order> getOrderByKey(String key , int page ,int  size)
     {
-        return orderRepository.findByNameContaining(key);
+        Pageable pageable = PageRequest.of(page , size);
+        return orderRepository.findByNameContaining(key , pageable).getContent();
     }
 
     public Order getOrder(Long id)
