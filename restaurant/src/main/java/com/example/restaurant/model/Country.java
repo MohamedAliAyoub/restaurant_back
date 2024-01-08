@@ -1,5 +1,6 @@
 package com.example.restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -20,6 +21,7 @@ public class Country extends PublicData {
     @Column(name = "code")
     private String code;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "country")
     private Set<State> states;
 }
