@@ -1,7 +1,6 @@
 package com.example.restaurant.model;
 
-public class Item {
-    private long id;
+public class Item extends BaseEntity{
 
     private String img;
 

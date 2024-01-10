@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "category")
-public class Category extends CategoryOrder{
+public class Category extends PublicData{
 
     @JsonIgnore
     @OneToMany(mappedBy = "category")

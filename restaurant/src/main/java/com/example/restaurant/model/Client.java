@@ -1,9 +1,7 @@
 package com.example.restaurant.model;
 
-public class Client {
-    private long id;
+public class Client extends PublicData{
 
-    private String fullName;
 
     private String email;
 
