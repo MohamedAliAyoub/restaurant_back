@@ -4,10 +4,7 @@ import com.example.restaurant.model.State;
 import com.example.restaurant.service.CountryService;
 import com.example.restaurant.service.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,11 @@ public class StateController {
     public List<State> getStates()
     {
         return stateService.getAllStates();
+    }
+
+    // http://localhost:8080/api/statescode?code={value}
+    @GetMapping("/statescode")
+    public List<State> getStatesByCode(@RequestParam String code){
+        return stateService.getStatesByCountryCode(code);
     }
 }

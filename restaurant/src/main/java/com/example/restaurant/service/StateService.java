@@ -20,4 +20,8 @@ public class StateService {
     {
         return stateRepository.findAll();
     }
+
+    public List<State> getStatesByCountryCode(String code){
+        return stateRepository.findByCountryCode(code);
+    }
 }
