@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 @Getter
@@ -26,7 +27,7 @@ public class RequestOrder extends CategoryOrder {
     private int totalQuantity;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "requestOrder")
-    private List<Item> items = new ArrayList<>();
+    private Set<Item> items = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "client_id")
