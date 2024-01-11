@@ -1,9 +1,6 @@
 package com.example.restaurant.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,16 +10,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "item")
 public class Item extends BaseEntity{
 
-    @Column(name = "code")
-    private String code;
+    @Column(name = "image")
+    private String img;
 
-    @Column(name = "note")
-    @Lob
-    private String note;
+    @Column(name = "quantity")
+    private int quantity;
 
-    @Column(name = "total_price")
-    private int totalPrice;
+    @Column(name = "price")
+    private int price;
 
-    @Column(name = "total_quantity")
-    private int totalQuantity;
+    @ManyToOne
+    @JoinColumn(name = "request_order_id")
+    private RequestOrder requestOrder;
 }

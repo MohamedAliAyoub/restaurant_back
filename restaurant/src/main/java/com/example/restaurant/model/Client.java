@@ -1,10 +1,11 @@
 package com.example.restaurant.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +18,13 @@ public class Client extends PublicData{
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "client")
+    private Set<RequestOrder> requestOrders = new HashSet<>();
+
+    public void addRequestOrder(RequestOrder requestOrder){
+        requestOrders.add(requestOrder);
+        requestOrder.setClient(this);
+    }
 
 }
