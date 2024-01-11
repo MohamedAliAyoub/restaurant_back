@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,7 +34,10 @@ public class PurchaseServiceImpl implements PurchaseService{
         requestOrder.setCode(myCode);
 
         /* #3 */
-        Set<Item> items = purchases.getItems();
+        List<Item> items = purchases.getItems();
+
+
+
         items.forEach(item -> requestOrder.addItem(item));
 
         /* #4 */
