@@ -34,7 +34,7 @@ public class User extends BaseEntity{
     )
     private Set<Authorities> authorities = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "code_id")
     private Code code;
 
