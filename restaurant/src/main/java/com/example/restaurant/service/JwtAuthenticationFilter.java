@@ -1,7 +1,8 @@
-package com.example.restaurant.config.springSecurity.jwt;
+package com.example.restaurant.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.restaurant.db.JwtProperties;
 import com.example.restaurant.deo.JwtLogin;
 import com.example.restaurant.service.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
