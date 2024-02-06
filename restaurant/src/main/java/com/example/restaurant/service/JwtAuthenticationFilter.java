@@ -4,7 +4,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.restaurant.db.JwtProperties;
 import com.example.restaurant.deo.JwtLogin;
+import com.example.restaurant.dto.LoginResponse;
 import com.example.restaurant.service.UserPrincipal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,10 +37,11 @@ public class JwtAuthenticationFilter {
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()));
     }
-    public String login(JwtLogin jwtLogin) {
+    public LoginResponse login(JwtLogin jwtLogin) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtLogin.getEmail(),
                 jwtLogin.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
-        return generateToken(authenticate);
+        String token =generateToken(authenticate);
+        return new LoginResponse(jwtLogin.getEmail(), token );
     }
 }

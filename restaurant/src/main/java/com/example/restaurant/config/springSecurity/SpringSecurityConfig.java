@@ -63,7 +63,7 @@ public class SpringSecurityConfig    {
 
                         .requestMatchers(HttpMethod.POST, "/signin").permitAll()
                         .requestMatchers("/", "/home" , "/signin").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
 
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -1,5 +1,6 @@
 package com.example.restaurant.controller;
 
+import com.example.restaurant.dto.LoginResponse;
 import com.example.restaurant.service.JwtAuthenticationFilter;
 import com.example.restaurant.deo.JwtLogin;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,9 @@ public class UserController {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    // http://localhost:8080/login
+    // http://localhost:8080/signin
     @PostMapping("/signin")
-    public String logIn(@RequestBody JwtLogin jwtLogin)
+    public LoginResponse logIn(@RequestBody JwtLogin jwtLogin)
     {
         return jwtAuthenticationFilter.login(jwtLogin);
     }
