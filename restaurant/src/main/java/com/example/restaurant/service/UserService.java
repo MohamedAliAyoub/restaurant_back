@@ -2,6 +2,7 @@ package com.example.restaurant.service;
 
 import com.example.restaurant.deo.UserRepository;
 import com.example.restaurant.model.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,5 +24,10 @@ public class UserService implements UserDetailsService {
         UserPrincipal userPrincipal = new UserPrincipal(user);
         System.out.println(user.getEmail() + "         " +user.getPassword());
         return userPrincipal;
+    }
+
+    @Transactional
+    public void addUser(User user){
+        userRepository.save(user);
     }
 }
