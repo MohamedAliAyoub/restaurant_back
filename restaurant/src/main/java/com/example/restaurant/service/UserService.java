@@ -26,6 +26,10 @@ public class UserService implements UserDetailsService {
         return userPrincipal;
     }
 
+    public boolean ifEmailExist(String email){
+        return userRepository.existsByEmail(email);
+    }
+
     @Transactional
     public void addUser(User user){
         userRepository.save(user);

@@ -1,6 +1,7 @@
 package com.example.restaurant.controller;
 
 import com.example.restaurant.config.springSecurity.jwt.JwtAuthorizationFilter;
+import com.example.restaurant.dto.AccountResponse;
 import com.example.restaurant.dto.LoginResponse;
 import com.example.restaurant.model.User;
 import com.example.restaurant.service.AuthoritiesService;
@@ -43,13 +44,21 @@ public class UserController {
 
     // http://localhost:8080/sigup
     @PostMapping("/signup")
-    public void createUser(@RequestBody JwtLogin jwtLogin){
-        User user = new User();
-        user.setEmail(jwtLogin.getEmail());
-        user.setPassword(passwordEncoder.encode(jwtLogin.getPassword()));
-        user.setActive(1);
-        user.getAuthorities().add(authoritiesService.getAuthorities().get(0));
-        userService.addUser(user);
+    public AccountResponse createUser(@RequestBody JwtLogin jwtLogin){
+        AccountResponse accountResponse = new AccountResponse();
+        boolean result = userService.ifEmailExist(jwtLogin.getEmail());
+        if(result){
+            accountResponse.setResult(0);
+        } else {
+            User user = new User();
+            user.setEmail(jwtLogin.getEmail());
+            user.setPassword(passwordEncoder.encode(jwtLogin.getPassword()));
+            user.setActive(1);
+            user.getAuthorities().add(authoritiesService.getAuthorities().get(0));
+            userService.addUser(user);
+            accountResponse.setResult(1);
+        }
+        return accountResponse;
     }
 
 }
