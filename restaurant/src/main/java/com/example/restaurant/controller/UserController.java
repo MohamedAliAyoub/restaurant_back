@@ -1,10 +1,7 @@
 package com.example.restaurant.controller;
 
 import com.example.restaurant.config.springSecurity.jwt.JwtAuthorizationFilter;
-import com.example.restaurant.dto.AccountResponse;
-import com.example.restaurant.dto.LoginResponse;
-import com.example.restaurant.dto.Mail;
-import com.example.restaurant.dto.UserActive;
+import com.example.restaurant.dto.*;
 import com.example.restaurant.model.Code;
 import com.example.restaurant.model.User;
 import com.example.restaurant.service.AuthoritiesService;
@@ -93,6 +90,21 @@ public class UserController {
             userActive.setActive(-1);
         }
         return userActive;
+    }
+
+    // http://localhost:8080/activated
+    @PostMapping("/activated")
+    public AccountResponse activeAccount(@RequestBody ActiveAccount activeAccount){
+        User user = userService.getUserByMail(activeAccount.getMail());
+        AccountResponse accountResponse = new AccountResponse();
+        if(user.getCode().getCode().equals(activeAccount.getCode())){
+            user.setActive(1);
+            userService.editUser(user);
+            accountResponse.setResult(1);
+        } else {
+            accountResponse.setResult(0);
+        }
+        return accountResponse;
     }
 
 }
