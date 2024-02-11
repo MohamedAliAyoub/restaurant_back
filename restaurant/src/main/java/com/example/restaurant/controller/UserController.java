@@ -33,7 +33,6 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     private EmailService emailService;
-    private UserCode userCode = new UserCode();
 
 
     public UserController(JwtAuthenticationFilter jwtAuthenticationFilter,
@@ -63,7 +62,7 @@ public class UserController {
         if (result) {
             accountResponse.setResult(0);
         } else {
-            String myCode = userCode.getCode();
+            String myCode = UserCode.getCode();
             User user = new User();
             user.setEmail(jwtLogin.getEmail());
             user.setPassword(passwordEncoder.encode(jwtLogin.getPassword()));

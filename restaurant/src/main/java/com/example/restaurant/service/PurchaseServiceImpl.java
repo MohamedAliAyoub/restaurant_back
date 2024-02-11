@@ -20,7 +20,7 @@ import java.util.UUID;
 public class PurchaseServiceImpl implements PurchaseService{
 
     private ClientRepository clientRepository;
-    private UserCode userCode = new UserCode();
+
 
     @Autowired
     public PurchaseServiceImpl(ClientRepository clientRepository ) {
@@ -33,7 +33,7 @@ public class PurchaseServiceImpl implements PurchaseService{
         /* #1 */
         RequestOrder requestOrder = purchases.getRequestOrder();
         /* #2 */
-        String myCode = userCode.getCode();
+        String myCode = UserCode.getCode();
         requestOrder.setCode(myCode);
 
         /* #3 */
