@@ -34,5 +34,6 @@ public class DBService implements CommandLineRunner {
 //        user.getAuthorities().add(authorities.get(0));
 //        user.getAuthorities().add(authorities.get(1));
 //        userRepository.save(user);
+//        userRepository.deleteAll();
     }
 }

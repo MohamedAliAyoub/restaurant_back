@@ -3,8 +3,10 @@ package com.example.restaurant.service;
 import com.example.restaurant.deo.ClientRepository;
 import com.example.restaurant.dto.PurchaseRequest;
 import com.example.restaurant.dto.PurchaseResponse;
+import com.example.restaurant.model.Code;
 import com.example.restaurant.model.Item;
 import com.example.restaurant.model.RequestOrder;
+import com.example.restaurant.util.UserCode;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,10 @@ import java.util.UUID;
 public class PurchaseServiceImpl implements PurchaseService{
 
     private ClientRepository clientRepository;
+    private UserCode userCode = new UserCode();
 
     @Autowired
-    public PurchaseServiceImpl(ClientRepository clientRepository) {
+    public PurchaseServiceImpl(ClientRepository clientRepository ) {
         this.clientRepository = clientRepository;
     }
 
@@ -30,7 +33,7 @@ public class PurchaseServiceImpl implements PurchaseService{
         /* #1 */
         RequestOrder requestOrder = purchases.getRequestOrder();
         /* #2 */
-        String myCode = getCode();
+        String myCode = userCode.getCode();
         requestOrder.setCode(myCode);
 
         /* #3 */
