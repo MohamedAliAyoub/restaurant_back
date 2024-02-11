@@ -4,6 +4,7 @@ import com.example.restaurant.config.springSecurity.jwt.JwtAuthorizationFilter;
 import com.example.restaurant.dto.AccountResponse;
 import com.example.restaurant.dto.LoginResponse;
 import com.example.restaurant.dto.Mail;
+import com.example.restaurant.dto.UserActive;
 import com.example.restaurant.model.Code;
 import com.example.restaurant.model.User;
 import com.example.restaurant.service.AuthoritiesService;
@@ -78,6 +79,21 @@ public class UserController {
             accountResponse.setResult(1);
         }
         return accountResponse;
+    }
+
+    // http://localhost:8080/active
+    @PostMapping("/active")
+    public UserActive getActiveUser(@RequestBody JwtLogin jwtLogin){
+        String enPassword = userService.getPasswordByEmail(jwtLogin.getEmail());  // from DB
+        boolean result = passwordEncoder.matches(jwtLogin.getPassword(),enPassword); // Sure
+        UserActive userActive = new UserActive();
+        if (result){
+            int act = userService.getUserActive(jwtLogin.getEmail());
+            userActive.setActive(act);
+        } else {
+            userActive.setActive(-1);
+        }
+        return userActive;
     }
 
 }

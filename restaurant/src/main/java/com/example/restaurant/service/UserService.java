@@ -1,5 +1,6 @@
 package com.example.restaurant.service;
 
+import com.example.restaurant.deo.JwtLogin;
 import com.example.restaurant.deo.UserRepository;
 import com.example.restaurant.model.User;
 import jakarta.transaction.Transactional;
@@ -33,5 +34,14 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void addUser(User user){
         userRepository.save(user);
+    }
+
+    @Transactional
+    public int getUserActive(String email){
+        return userRepository.getActive(email);
+    }
+
+    public String getPasswordByEmail(String email){
+        return userRepository.getPasswordByEmail(email);
     }
 }
