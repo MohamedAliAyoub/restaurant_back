@@ -63,7 +63,7 @@ public class SpringSecurityConfig    {
 
                         .requestMatchers(HttpMethod.POST, "/signin" , "signup").permitAll()
                         .requestMatchers("/", "/home" , "/signin" , "active" ,
-                                "activated" , "checkEmail" , "resetPassword").permitAll()
+                                "activated" , "checkEmail" , "resetPassword" , "/social/**").permitAll()
                         .anyRequest().permitAll()
 
                 )
