@@ -95,12 +95,50 @@ public class UserController {
     // http://localhost:8080/activated
     @PostMapping("/activated")
     public AccountResponse activeAccount(@RequestBody ActiveAccount activeAccount){
-        User user = userService.getUserByMail(activeAccount.getMail());
+        User user = userService.getUserByMail(activeAccount.getEmail());
         AccountResponse accountResponse = new AccountResponse();
         if(user.getCode().getCode().equals(activeAccount.getCode())){
             user.setActive(1);
             userService.editUser(user);
             accountResponse.setResult(1);
+        } else {
+            accountResponse.setResult(0);
+        }
+        return accountResponse;
+    }
+
+    // http://localhost:8080/checkEmail
+    @PostMapping("/checkEmail")
+    public AccountResponse resetPasswordEmail(@RequestBody ResetPassword resetPassword){
+        User user = this.userService.getUserByMail(resetPassword.getEmail());
+        AccountResponse accountResponse = new AccountResponse();
+        if(user != null ){
+            String code = UserCode.getCode();
+            Mail mail = new Mail(resetPassword.getEmail(),code);
+            emailService.sendCodeByMail(mail);
+            user.getCode().setCode(code);
+            this.userService.editUser(user);
+            accountResponse.setResult(1);
+        } else {
+            accountResponse.setResult(0);
+        }
+        return accountResponse;
+    }
+
+
+    // http://localhost:8080/resetPassword
+    @PostMapping("/resetPassword")
+    public AccountResponse resetPassword(@RequestBody NewPassword newPassword){
+        User user = this.userService.getUserByMail(newPassword.getEmail());
+        AccountResponse accountResponse = new AccountResponse();
+        if(user != null){
+            if(user.getCode().getCode().equals(newPassword.getCode())){
+                user.setPassword(passwordEncoder.encode(newPassword.getPassword()));
+                userService.addUser(user);
+                accountResponse.setResult(1);
+            } else {
+                accountResponse.setResult(0);
+            }
         } else {
             accountResponse.setResult(0);
         }

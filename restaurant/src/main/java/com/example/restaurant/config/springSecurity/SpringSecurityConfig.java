@@ -62,7 +62,8 @@ public class SpringSecurityConfig    {
                 .authorizeHttpRequests((requests) -> requests
 
                         .requestMatchers(HttpMethod.POST, "/signin" , "signup").permitAll()
-                        .requestMatchers("/", "/home" , "/signin" , "active" , "activated").permitAll()
+                        .requestMatchers("/", "/home" , "/signin" , "active" ,
+                                "activated" , "checkEmail" , "resetPassword").permitAll()
                         .anyRequest().permitAll()
 
                 )
